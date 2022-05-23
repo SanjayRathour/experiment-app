@@ -1,27 +1,25 @@
-import { Box } from "@mui/material";
+import { Box } from "@mui/system";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import FlexBox from "../components/containers/FlexBox";
 import Section from "../components/containers/Section";
-import Footer from "../components/Footer";
-import Logo from "../components/Logo";
 import Body1 from "../components/typography/Body1";
 import Body2 from "../components/typography/Body2";
-import { agreeMessage, introduction } from "../data/welcomePage";
+import { description, selection } from "../data/buyingDescription";
 
-const WelcomePage = () => {
+const BuyingDescriptionPage = () => {
   const navigate = useNavigate();
   return (
     <Box>
       <Section>
-        <Logo />
-        <Body1 text={introduction} sx={{ mb: 14.5 }} />
-        <Body2 text={agreeMessage} sx={{ mb: "21px" }} />
+        <Body1 text={description} sx={{ mb: "92px" }} />
+        <Body2 text={selection} sx={{ mb: 12 }} />
         <FlexBox>
           <PrimaryButton
-            text="לשאלון"
+            text="להתחיל"
             onClick={() => {
-              navigate("/questions");
+              navigate("/products");
             }}
           />
         </FlexBox>
@@ -30,4 +28,4 @@ const WelcomePage = () => {
   );
 };
 
-export default WelcomePage;
+export default BuyingDescriptionPage;

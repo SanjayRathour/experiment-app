@@ -1,15 +1,17 @@
 import { Box } from "@mui/material";
+import React from "react";
 import Section from "../components/containers/Section";
-import QuestionForm from "../components/QuestionForm";
+import Footer from "../components/Footer";
 
-const QuestionsPage = () => {
+const ProductsPage = () => {
   return (
     <Box>
       <Section>
-        <QuestionForm />
+        sssssssssss
+        <Footer />
       </Section>
     </Box>
   );
 };
 
-export default QuestionsPage;
+export default ProductsPage;

@@ -1,17 +1,15 @@
 import { Button, SxProps } from "@mui/material";
-import { MouseEventHandler } from "react";
 
 interface Props {
   text: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
   sx?: SxProps;
 }
 
-const PrimaryButton = ({ text, onClick, sx }: Props) => {
+const PrimaryFormButton = ({ text, sx }: Props) => {
   return (
     <Button
+      type="submit"
       variant="contained"
-      onClick={onClick}
       sx={[
         {
           width: "127px",
@@ -27,4 +25,4 @@ const PrimaryButton = ({ text, onClick, sx }: Props) => {
   );
 };
 
-export default PrimaryButton;
+export default PrimaryFormButton;
