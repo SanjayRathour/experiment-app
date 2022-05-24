@@ -35,7 +35,6 @@ const QuestionForm = () => {
 
   //on form submit
   const onSubmit: SubmitHandler<any> = (data: any) => {
-    console.log(data);
     dispatch(setAnswers(data));
     navigate("/bd");
   };
