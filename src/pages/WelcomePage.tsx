@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import FlexBox from "../components/containers/FlexBox";
 import Section from "../components/containers/Section";
-import Footer from "../components/Footer";
 import Logo from "../components/Logo";
 import Body1 from "../components/typography/Body1";
 import Body2 from "../components/typography/Body2";

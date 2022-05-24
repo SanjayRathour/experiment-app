@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import { CacheProvider } from "@emotion/react";
@@ -22,9 +24,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <CacheProvider value={cacheRtl}>
     <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </Provider>
     </React.StrictMode>
   </CacheProvider>
 );

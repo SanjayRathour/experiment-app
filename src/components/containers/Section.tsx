@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Section = ({ children, sx = { p: 10 } }: Props) => {
+const Section = ({ children, sx = { px: 10, pb: 25, pt: 4 } }: Props) => {
   return (
     <FlexBox>
       <Box

@@ -5,6 +5,7 @@ interface Props {
   dir?: string;
   ai?: string;
   jc?: string;
+  props?: any;
   children: ReactNode;
   sx?: SxProps<Theme>;
 }
@@ -13,6 +14,7 @@ const FlexBox = ({
   dir = "row",
   ai = "center",
   jc = "center",
+  props,
   sx,
   children,
 }: Props) => {
@@ -27,6 +29,7 @@ const FlexBox = ({
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
+      {...props}
     >
       {children}
     </Box>

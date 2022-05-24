@@ -1,5 +1,5 @@
-import { Box, Typography } from "@mui/material";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { Box } from "@mui/material";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import PrimaryFormButton from "./buttons/PrimaryFormButton";
 import FlexBox from "./containers/FlexBox";
@@ -13,7 +13,6 @@ const QuestionForm = () => {
     register,
     handleSubmit,
     watch,
-    control,
     formState: { errors },
   } = useForm();
   const onSubmit: SubmitHandler<any> = (data: any) => {
@@ -25,14 +24,14 @@ const QuestionForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Body2 text="גיל" />
 
-        <Input type="text" register={register} name="age" />
+        <Input type="text" register={register} name="q1" />
         <Body2 text="מין" />
-        <Select width="85px" name="sex" register={register}>
+        <Select width="85px" name="q2" register={register}>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </Select>
         <Body2 text="מצב משפחתי" />
-        <Select width="150px" name="maritalStatus" register={register}>
+        <Select width="150px" name="q3" register={register}>
           <option value="single">Single</option>
           <option value="relationship">Relationship</option>
           <option value="married">Married</option>
@@ -40,9 +39,9 @@ const QuestionForm = () => {
           <option value="other">Other</option>
         </Select>
         <Body2 text="מספר נפשות בבית" />
-        <Input type="text" register={register} name="numberOfPersons" />
+        <Input type="text" register={register} name="q4" />
         <Body2 text="מהו טווח ההכנסה החודשית של התא המשפחתי?" />
-        <Select width="270px" name="monthlyIncome" register={register}>
+        <Select width="270px" name="q5" register={register}>
           <option value="below5000">Below 5000</option>
           <option value="relationship">5000-10000</option>
           <option value="married">10000-15000</option>
@@ -51,7 +50,7 @@ const QuestionForm = () => {
           <option value="other">Above 35000</option>
         </Select>
         <Body2 text="איזור מגורים" />
-        <Select width="270px" name="livingArea" register={register}>
+        <Select width="270px" name="q6" register={register}>
           <option value="below5000">North</option>
           <option value="relationship">Center</option>
           <option value="married">Shrone Area</option>
@@ -60,7 +59,7 @@ const QuestionForm = () => {
           <option value="other">South</option>
         </Select>
         <Body2 text="כמה פעמים בשבוע הינך מבקר/ת בסופר?" />
-        <Select width="84px" name="howManyTimes" register={register}>
+        <Select width="84px" name="q7" register={register}>
           <option value="one">One</option>
           <option value="one">Two</option>
           <option value="one">Three</option>

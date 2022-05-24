@@ -8,6 +8,7 @@ const theme = createTheme({
     },
     white: "#ffffff",
     black: "#868D96",
+    blueText: "#2485DA",
   },
 
   spacing: 4,
