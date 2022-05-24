@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import moneyReducer from "./moneySlice";
+import productReducer from "./productSlice";
+import answerReducer from "./answerSlice";
 
 export const store = configureStore({
   reducer: {
     money: moneyReducer,
+    products: productReducer,
+    answers: answerReducer,
   },
 });
 

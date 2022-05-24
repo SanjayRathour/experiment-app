@@ -3,6 +3,7 @@ import moment from "moment";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { decreaseAmount, increaseAmount } from "../redux/moneySlice";
+import { addToSelected, removeFromSelected } from "../redux/productSlice";
 import FlexBox from "./containers/FlexBox";
 
 // import RemoveIcon from "@mui/icons-material/Remove";
@@ -38,6 +39,7 @@ const Product = ({ product }: { product: any }) => {
           onClick={() => {
             setSelected(false);
             dispatch(increaseAmount(product.price));
+            dispatch(removeFromSelected(product));
           }}
           sx={{ position: "absolute", left: "2px", top: "2px" }}
         />
@@ -46,6 +48,7 @@ const Product = ({ product }: { product: any }) => {
           onClick={() => {
             setSelected(true);
             dispatch(decreaseAmount(product.price));
+            dispatch(addToSelected(product));
           }}
           sx={{ position: "absolute", left: "2px", top: "2px" }}
         />

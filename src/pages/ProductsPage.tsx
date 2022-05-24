@@ -14,7 +14,6 @@ const ProductsPage = () => {
       setLoading(true);
       const res = await getProductsApi();
       setLoading(false);
-      console.log(res);
       setProducts(res);
     } catch (err) {
       setLoading(false);
