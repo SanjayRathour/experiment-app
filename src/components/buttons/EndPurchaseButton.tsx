@@ -71,9 +71,9 @@ const EndPurchaseButton = ({ sx }: Props) => {
         variant="contained"
         sx={[
           {
-            width: "127px",
-            height: "58px",
-            fontSize: "20px",
+            width: { xs: 102, sm: 127 },
+            height: { xs: 48, sm: 57 },
+            fontSize: { xs: 14, sm: 20 },
             borderRadius: "23px",
             border: "4px solid white",
             backgroundColor: "#4D1BF8",

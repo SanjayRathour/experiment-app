@@ -8,24 +8,33 @@ const Footer = () => {
   const amount = useSelector((state: RootState) => state.money.amount);
   return (
     <FlexBox
-      jc="space-around"
       sx={{
         backgroundColor: "#1579F2",
         height: 76,
+        px: 2,
         width: "100%",
         position: "fixed",
         bottom: "0px",
+        justifyContent: { xs: "space-between", sm: "space-around" },
       }}
     >
       <FlexBox dir="column">
-        <FlexBox sx={{ "& img": { mr: 2 } }}>
+        <FlexBox
+          sx={{
+            "& img": {
+              mr: 2,
+              width: { xs: 26, sm: 37 },
+              height: { xs: 21, sm: 27 },
+            },
+          }}
+        >
           <img src="/cart.png" width={37} height={27} />
           <Typography sx={{ color: "white", mx: 1 }}>לתשלום</Typography>
-          <Typography sx={{ color: "white", fontSize: 30 }}>
+          <Typography sx={{ color: "white", fontSize: { xs: 24, sm: 30 } }}>
             ₪ {(100 - amount).toFixed(2)}
           </Typography>
         </FlexBox>
-        <Typography sx={{ color: "white" }}>
+        <Typography sx={{ color: "white", fontSize: { xs: 15 } }}>
           נשארו בארנק עוד {amount.toFixed(2)} ₪
         </Typography>
       </FlexBox>

@@ -16,7 +16,7 @@ const PopupBackdrop = ({
 
   return (
     <Backdrop sx={{ color: "#fff", zIndex: "2000" }} open={open}>
-      <Paper elevation={3} sx={{ width: 350, py: 3 }}>
+      <Paper elevation={3} sx={{ width: { xs: "85%", sm: 320 }, py: 3 }}>
         <Typography sx={{ flip: "false", fontSize: 20, px: 4 }}>
           There are another {amount.toFixed(2)} NIS left in the wallet Are you
           sure That you want to complete the purchase
