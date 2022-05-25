@@ -9,12 +9,14 @@ import Input from "./Input";
 import Select from "./Select";
 import Body2 from "./typography/Body2";
 import Error from "./messages/Error";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAnswers } from "../redux/answerSlice";
+import { RootState } from "../redux/store";
 
 const QuestionForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const answers = useSelector((state: RootState) => state.answers);
 
   // schema for yup validation
   const schema = yup.object({
@@ -31,7 +33,18 @@ const QuestionForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      q1: answers.q1,
+      q2: answers.q2,
+      q3: answers.q3,
+      q4: answers.q4,
+      q5: answers.q5,
+      q6: answers.q6,
+      q7: answers.q7,
+    },
+  });
 
   //on form submit
   const onSubmit: SubmitHandler<any> = (data: any) => {
@@ -73,23 +86,23 @@ const QuestionForm = () => {
         <Body2 text="מהו טווח ההכנסה החודשית של התא המשפחתי?" />
         <Select width="270px" name="q5" register={register}>
           <option value="below5000">Below 5000</option>
-          <option value="relationship">5000-10000</option>
-          <option value="married">10000-15000</option>
-          <option value="widowed">15000-25000</option>
-          <option value="other">25000-35000</option>
-          <option value="other">Above 35000</option>
+          <option value="5000-10000">5000-10000</option>
+          <option value="10000-15000">10000-15000</option>
+          <option value="15000-25000">15000-25000</option>
+          <option value="25000-35000">25000-35000</option>
+          <option value="abouve35000">Above 35000</option>
         </Select>
         {errors.q5 && <Error message={errors.q5.message} />}
 
         {/* area of residence */}
         <Body2 text="איזור מגורים" />
         <Select width="270px" name="q6" register={register}>
-          <option value="below5000">North</option>
-          <option value="relationship">Center</option>
-          <option value="married">Shrone Area</option>
-          <option value="widowed">Jerusalem</option>
-          <option value="other">Judea and Samaria Area</option>
-          <option value="other">South</option>
+          <option value="north">North</option>
+          <option value="center">Center</option>
+          <option value="shroneArea">Shrone Area</option>
+          <option value="jerusalem">Jerusalem</option>
+          <option value="jaudeaAndSamariaArea">Judea and Samaria Area</option>
+          <option value="south">South</option>
         </Select>
         {errors.q6 && <Error message={errors.q6.message} />}
 
@@ -97,12 +110,12 @@ const QuestionForm = () => {
         <Body2 text="כמה פעמים בשבוע הינך מבקר/ת בסופר?" />
         <Select width="84px" name="q7" register={register}>
           <option value="one">One</option>
-          <option value="one">Two</option>
-          <option value="one">Three</option>
-          <option value="one">Four</option>
-          <option value="one">Five</option>
-          <option value="one">Six</option>
-          <option value="one">Seven</option>
+          <option value="two">Two</option>
+          <option value="three">Three</option>
+          <option value="four">Four</option>
+          <option value="five">Five</option>
+          <option value="six">Six</option>
+          <option value="seven">Seven</option>
         </Select>
         {errors.q7 && <Error message={errors.q7.message} />}
 

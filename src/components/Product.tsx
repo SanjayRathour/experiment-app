@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { decreaseAmount, increaseAmount } from "../redux/moneySlice";
 import { addToSelected, removeFromSelected } from "../redux/productSlice";
@@ -16,11 +16,28 @@ const Product = ({ product }: { product: any }) => {
   const [selected, setSelected] = useState<boolean>(false);
   const dispatch = useDispatch();
   const amount = useSelector((state: RootState) => state.money.amount);
+  const selectedProducts = useSelector(
+    (state: RootState) => state.products.selectedProducts
+  );
   const [amountError, setAmountError] = useState<boolean>(false);
   const refStartDate = moment(product.refDateStart).format("DD/M/YYYY");
   const refEndDate = moment(product.refDateEnd).format("DD/M/YYYY");
   const price = product.price.toFixed(2).toString();
   const priceArray = price.split(".");
+
+  // check if the product is selected
+  const isSelected = () => {
+    const selected = selectedProducts.filter(
+      (selectedProduct: any) => selectedProduct.id === product.id
+    );
+    if (selected.length > 0) {
+      setSelected(true);
+    }
+  };
+
+  useEffect(() => {
+    isSelected();
+  }, []);
 
   return (
     <Box

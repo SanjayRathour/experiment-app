@@ -1,9 +1,12 @@
 import { Box, Button, SxProps } from "@mui/material";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postExperimentApi } from "../../api/products";
+import { resetAnswers } from "../../redux/answerSlice";
+import { resetMoney } from "../../redux/moneySlice";
+import { resetProducts } from "../../redux/productSlice";
 import { RootState } from "../../redux/store";
 import LoadingBackdrop from "../LoadingBackdrop";
 import PopupBackdrop from "../PopupBackdrop";
@@ -20,6 +23,7 @@ const EndPurchaseButton = ({ sx }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies();
+  const dispatch = useDispatch();
 
   const cart = experiment.selectedProducts.map((product: any) => product.id);
 
@@ -35,6 +39,9 @@ const EndPurchaseButton = ({ sx }: Props) => {
       },
     });
     setLoading(false);
+    dispatch(resetAnswers());
+    dispatch(resetMoney());
+    dispatch(resetProducts());
     setCookie("experiment", true, { path: "/" });
     navigate("/thank");
   };

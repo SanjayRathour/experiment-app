@@ -6,6 +6,7 @@ const initialState = {
     group: "",
     cart: [],
     products: [],
+    loaded: false,
   },
   selectedProducts: [],
 };
@@ -29,11 +30,19 @@ export const productSlice = createSlice({
     resetProducts: (state: any) => {
       return { ...initialState };
     },
+    setProductLoaded: (state: any) => {
+      state.products.loaded = true;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToSelected, removeFromSelected, setProducts, resetProducts } =
-  productSlice.actions;
+export const {
+  addToSelected,
+  removeFromSelected,
+  setProducts,
+  resetProducts,
+  setProductLoaded,
+} = productSlice.actions;
 
 export default productSlice.reducer;

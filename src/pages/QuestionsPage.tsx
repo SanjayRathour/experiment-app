@@ -13,7 +13,6 @@ const QuestionsPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(resetAnswers());
     if (cookies.experiment === "true") {
       navigate("/thank");
     }

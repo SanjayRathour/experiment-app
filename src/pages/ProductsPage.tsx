@@ -9,7 +9,11 @@ import Section from "../components/containers/Section";
 import Footer from "../components/Footer";
 import Product from "../components/Product";
 import { resetMoney } from "../redux/moneySlice";
-import { resetProducts, setProducts } from "../redux/productSlice";
+import {
+  resetProducts,
+  setProductLoaded,
+  setProducts,
+} from "../redux/productSlice";
 import { RootState } from "../redux/store";
 
 const ProductsPage = () => {
@@ -25,6 +29,7 @@ const ProductsPage = () => {
       const res = await getProductsApi();
       setLoading(false);
       dispatch(setProducts(res));
+      dispatch(setProductLoaded());
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -32,20 +37,16 @@ const ProductsPage = () => {
   };
 
   useEffect(() => {
-    dispatch(resetProducts());
-    dispatch(resetMoney());
     if (cookies.experiment === "true") {
       navigate("/thank");
     } else {
       if (Object.keys(answers).length === 0) {
         navigate("/");
       }
-      getProducts();
+      if (!products.loaded) {
+        getProducts();
+      }
     }
-    return () => {
-      dispatch(resetProducts());
-      dispatch(resetMoney());
-    };
   }, []);
   return (
     <Box sx={{ backgroundColor: "#DFDFDF", minHeight: "100vh" }}>
