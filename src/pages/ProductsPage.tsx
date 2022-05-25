@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getProductsApi } from "../api/products";
 import CircularBar from "../components/CircularBar";
 import Section from "../components/containers/Section";
@@ -11,6 +13,8 @@ import { RootState } from "../redux/store";
 
 const ProductsPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const [cookies] = useCookies();
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products.products);
   const getProducts = async () => {
@@ -26,7 +30,11 @@ const ProductsPage = () => {
   };
 
   useEffect(() => {
-    getProducts();
+    if (cookies.experiment === "true") {
+      navigate("/thank");
+    } else {
+      getProducts();
+    }
   }, []);
   return (
     <Box sx={{ backgroundColor: "#DFDFDF", minHeight: "100vh" }}>

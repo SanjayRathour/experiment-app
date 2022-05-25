@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import moment from "moment";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { decreaseAmount, increaseAmount } from "../redux/moneySlice";
 import { addToSelected, removeFromSelected } from "../redux/productSlice";
+import { RootState } from "../redux/store";
 import FlexBox from "./containers/FlexBox";
-
-// import RemoveIcon from "@mui/icons-material/Remove";
+import ErrorSnackbar from "./ErrorSnackbar";
 import AddIconComponent from "./icons/AddIcon";
 import RemoveIconComponent from "./icons/RemoveIcon";
 
@@ -15,10 +15,11 @@ const picUrl: string = "https://test-experiment-1f922.web.app/";
 const Product = ({ product }: { product: any }) => {
   const [selected, setSelected] = useState<boolean>(false);
   const dispatch = useDispatch();
-
+  const amount = useSelector((state: RootState) => state.money.amount);
+  const [amountError, setAmountError] = useState<boolean>(false);
   const refStartDate = moment(product.refDateStart).format("DD/M/YYYY");
   const refEndDate = moment(product.refDateEnd).format("DD/M/YYYY");
-  const price = product.price.toString();
+  const price = product.price.toFixed(2).toString();
   const priceArray = price.split(".");
 
   return (
@@ -33,6 +34,25 @@ const Product = ({ product }: { product: any }) => {
         backgroundColor: "white",
       }}
     >
+      {/* when item is selected */}
+      {selected && (
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            backgroundColor: "#2CCE2730",
+            borderRadius: "18px",
+          }}
+        ></Box>
+      )}
+
+      {/* show error if the amount is less than or 0 */}
+      <ErrorSnackbar
+        open={amountError}
+        setOpen={setAmountError}
+        message="לא מספיק כסף"
+      />
       {/* add and remove icons */}
       {selected ? (
         <RemoveIconComponent
@@ -46,9 +66,13 @@ const Product = ({ product }: { product: any }) => {
       ) : (
         <AddIconComponent
           onClick={() => {
-            setSelected(true);
-            dispatch(decreaseAmount(product.price));
-            dispatch(addToSelected(product));
+            if (amount - product.price < 0) {
+              setAmountError(true);
+            } else {
+              setSelected(true);
+              dispatch(decreaseAmount(product.price));
+              dispatch(addToSelected(product));
+            }
           }}
           sx={{ position: "absolute", left: "2px", top: "2px" }}
         />
@@ -74,7 +98,11 @@ const Product = ({ product }: { product: any }) => {
       )}
       {/* image */}
       <FlexBox sx={{ pt: 2 }}>
-        <img src={`${picUrl}/${product.picUrl}`} height={240} />
+        <img
+          src={`${picUrl}/${product.picUrl}`}
+          height={240}
+          alt="product image"
+        />
       </FlexBox>
 
       {/* description of product */}
@@ -97,7 +125,7 @@ const Product = ({ product }: { product: any }) => {
           sx={{
             fontSize: 30,
             color: "blueText",
-            "& sup": { fontSize: 20 },
+            "& sup": { fontSize: 18 },
           }}
         >
           <span>₪</span>

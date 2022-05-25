@@ -15,6 +15,8 @@ const Select = ({ children, name, register, width }: Props) => {
         "& select": {
           height: 38,
           appearance: "none",
+          pr: 7,
+          pl: 2,
           width: { width },
           WebkitAppearance: "none",
           MozAppearance: "none",
@@ -23,13 +25,12 @@ const Select = ({ children, name, register, width }: Props) => {
           backgroundRepeat: "no-repeat",
           color: "black",
           cursor: "pointer",
-          px: 4,
+
           mb: 4,
           outline: "none",
           border: "1px solid #E0E0E0",
           borderRadius: "5px",
           "&:focus": { border: "3px solid #A6CBF3" },
-          "& svg": { textAlign: "center" },
         },
       }}
     >

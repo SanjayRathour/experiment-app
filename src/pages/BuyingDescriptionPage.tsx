@@ -1,5 +1,6 @@
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import FlexBox from "../components/containers/FlexBox";
@@ -10,6 +11,13 @@ import { description, selection } from "../data/buyingDescription";
 
 const BuyingDescriptionPage = () => {
   const navigate = useNavigate();
+  const [cookies] = useCookies();
+
+  useEffect(() => {
+    if (cookies.experiment === "true") {
+      navigate("/thank");
+    }
+  }, []);
   return (
     <Box>
       <Section>

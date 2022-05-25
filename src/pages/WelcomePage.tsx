@@ -1,4 +1,6 @@
 import { Box } from "@mui/material";
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import FlexBox from "../components/containers/FlexBox";
@@ -10,6 +12,14 @@ import { agreeMessage, introduction } from "../data/welcomePage";
 
 const WelcomePage = () => {
   const navigate = useNavigate();
+  const [cookies] = useCookies();
+
+  useEffect(() => {
+    if (cookies.experiment === "true") {
+      navigate("/thank");
+    }
+  }, []);
+
   return (
     <Box>
       <Section>

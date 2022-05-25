@@ -1,5 +1,7 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import FlexBox from "../components/containers/FlexBox";
 import Section from "../components/containers/Section";
 import Logo from "../components/Logo";
@@ -7,6 +9,13 @@ import Body1 from "../components/typography/Body1";
 import { thankYouMessage } from "../data/thankYou";
 
 const ThankYouPage = () => {
+  const navigate = useNavigate();
+  const [cookies] = useCookies();
+  useEffect(() => {
+    if (cookies.experiment !== "true") {
+      navigate("/");
+    }
+  }, []);
   return (
     <Box>
       <Section>
