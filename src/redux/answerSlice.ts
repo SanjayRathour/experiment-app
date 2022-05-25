@@ -9,10 +9,13 @@ export const answerSlice = createSlice({
     setAnswers: (state: any, action: PayloadAction<any>) => {
       return { ...action.payload };
     },
+    resetAnswers: (state: any) => {
+      return { ...initialState };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAnswers } = answerSlice.actions;
+export const { setAnswers, resetAnswers } = answerSlice.actions;
 
 export default answerSlice.reducer;

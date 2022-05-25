@@ -7,10 +7,15 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+
+// persistor
+let persistor = persistStore(store);
 
 // Create rtl cache
 const cacheRtl = createCache({
@@ -24,11 +29,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <CacheProvider value={cacheRtl}>
     <React.StrictMode>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </Provider>
+      <PersistGate loading={null} persistor={persistor}>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </Provider>
+      </PersistGate>
     </React.StrictMode>
   </CacheProvider>
 );

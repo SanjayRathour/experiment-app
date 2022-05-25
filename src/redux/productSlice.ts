@@ -26,11 +26,14 @@ export const productSlice = createSlice({
     setProducts: (state: any, action: PayloadAction<any>) => {
       state.products = action.payload;
     },
+    resetProducts: (state: any) => {
+      return { ...initialState };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToSelected, removeFromSelected, setProducts } =
+export const { addToSelected, removeFromSelected, setProducts, resetProducts } =
   productSlice.actions;
 
 export default productSlice.reducer;
